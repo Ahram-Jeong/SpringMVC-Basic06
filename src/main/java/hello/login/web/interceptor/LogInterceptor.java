@@ -28,13 +28,13 @@ public class LogInterceptor implements HandlerInterceptor {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler; // 호출 할 메소드의 모든 정보가 포함 되어 있음
         }
-        log.info("********** REQUEST [{}][{}][{}]", uuid, requestURI, handler);
+        log.info("** REQUEST [{}][{}][{}]", uuid, requestURI, handler);
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("********** postHandle [{}]", modelAndView);
+        log.info("** postHandle [{}]", modelAndView);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class LogInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String uuid = (String) request.getAttribute(LOG_ID);
 
-        log.info("********** RESPONSE [{}][{}][{}]", uuid, requestURI, handler);
+        log.info("** RESPONSE [{}][{}][{}]", uuid, requestURI, handler);
         if (ex != null) {
-            log.error("********** afterCompletion error!", ex);
+            log.error("** afterCompletion error!", ex);
         }
     }
 }

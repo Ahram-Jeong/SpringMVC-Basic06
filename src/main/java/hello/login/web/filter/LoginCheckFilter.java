@@ -23,14 +23,14 @@ public class LoginCheckFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
         try {
-            log.info("********** Start 인증 체크 필터 {}", requestURI);
+            log.info("** Start 인증 체크 필터 {}", requestURI);
 
             if (isLoginCheckPath(requestURI)) {
-                log.info("********** 인증 체크 로직 실행 {}", requestURI);
+                log.info("** 인증 체크 로직 실행 {}", requestURI);
                 HttpSession session = httpRequest.getSession(false);
                 if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
 
-                    log.info("********** 미인증 사용자 요청 {}", requestURI);
+                    log.info("** 미인증 사용자 요청 {}", requestURI);
                     // 로그인으로 redirect
                     httpResponse.sendRedirect("/login?redirectURL=" + requestURI);
                     return;
@@ -41,7 +41,7 @@ public class LoginCheckFilter implements Filter {
         } catch (Exception e) {
             throw e; // 예외 로깅 가능하시만, WAS까지 예외를 보내줘야 함
         } finally {
-            log.info("********** End 인증 체크 필터 {}", requestURI);
+            log.info("** End 인증 체크 필터 {}", requestURI);
         }
     }
 
